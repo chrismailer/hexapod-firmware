@@ -27,12 +27,12 @@ public:
     /** @brief The differential gain of the controller.  **/
     double _Kd =  0.027;
     /** @brief The error in the controller. **/
-    double _pre_error = 0;
+    volatile double _pre_error = 0;
     /** @brief The cumulative integral of the controller.  **/
-    double _integral = 0;
+    volatile double _integral = 0;
 
     /** @brief The state of the controller. **/
-    bool enabled = false;
+    volatile bool enabled = false;
 
 	/**
 	 * @brief Default constructor for the class.

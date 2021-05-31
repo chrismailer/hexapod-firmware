@@ -22,11 +22,11 @@ class Path{
 
 private:
 	/** @brief A point object holding the starting points for the legs path. **/
-	Point<double> startPoint;
+	volatile Point<double> startPoint;
 	/** @brief A point object holding the middle points for the legs path. **/
-	Point<double> midPoint;
+	volatile Point<double> midPoint;
 	/** @brief A point object holding the end points for the legs path. **/
-	Point<double> endPoint;
+	volatile Point<double> endPoint;
 
 	/**
 	 * 	@brief Generates the path points from the starting, middle and end points.
@@ -48,10 +48,10 @@ public:
 	double tf = 2;					//special case of tv = tf/2
 
 	/** @brief An array holding the path points as XYZ values. **/
-	Point<double> pathXYZ[pathSizeDef*2-2];
+	volatile Point<double> pathXYZ[pathSizeDef*2-2];
 
 	/** @brief An array holding the path velocities as XYZ_dot values. **/
-	Point<double> pathXYZ_dot[pathSizeDef*2-2];
+	volatile Point<double> pathXYZ_dot[pathSizeDef*2-2];
 
 	/**
 	 * @brief Default constructor for the class.

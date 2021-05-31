@@ -154,9 +154,9 @@ public:
 	double IMUTransFreq = 1;
 
 	 /** @brief The pitch angle of the slope.  **/
-	double slopePitch = 0;
+	volatile double slopePitch = 0;
 	 /** @brief The roll angle of the slope.  **/
-	double slopeRoll = 0;
+	volatile double slopeRoll = 0;
 
 	/** @brief The radial distance from the center of mass to the inner position of the foot tip during walking. **/
 	double radialDistance = 250.0; 	// mm
@@ -188,11 +188,11 @@ public:
 	uint8_t function = 0;
 
 	/** @brief The pitch angle of the body of the hexapod. **/
-	double pitchAngle = 0;
+	volatile double pitchAngle = 0;
 	/** @brief The roll angle of the body of the hexapod. **/
-	double rollAngle = 0;
+	volatile double rollAngle = 0;
 	/** @brief The yaw angle of the body of the hexapod. **/
-	double yawAngle = 0;
+	volatile double yawAngle = 0;
 
 	/** @brief A position array containing a default standing position. **/
 	double xyz_stand[6][3] = {{283.710,0.0,-this->bodyHeight},{141.855,-245.7,-this->bodyHeight},{-141.855,-245.7,-this->bodyHeight},{-283.710,0.0,-this->bodyHeight},{-141.855,245.7,-this->bodyHeight},{141.855,245.7,-this->bodyHeight}};
@@ -202,14 +202,14 @@ public:
 	/** @brief A pointer to a Remote object **/
 	Remote * remote = nullptr;
 	/** @brief A counter holding the current position in the walking path. **/
-	uint8_t currentPathPoint = 0;
+	volatile uint8_t currentPathPoint = 0;
 	/** @brief An array of pointers to Leg objects. **/
 	Leg * legs[6];
 
 	/** @brief Goes true if the Hexapod is ready to move to a new position.  **/
-	bool newPosition = false;
+	volatile bool newPosition = false;
 	/** @brief State variable to prevent timers running until initialisations are complete.  **/
-	bool timersReady = false;
+	volatile bool timersReady = false;
 
 	/** @brief STM32F4 internal temperature at startup. **/
 	double startingTemperature = -9999;

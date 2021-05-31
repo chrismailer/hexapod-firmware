@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 	HEX.pidRoll->togglePID(false);
 	HEX.pidYaw->togglePID(false);
 
-	//HEX.pidPitch->setParameters(1,0,0);
+	// HEX.pidPitch->setParameters(1,0,0);
 
 	//uint8_t data3[] = {180,0,75,3};		//correct for motor 1 not hitting body.		// ALL IGNORING OTHER LEG POSITIONS
 	//uint8_t data3[] = {75,0,245,3};		//correct for motor 2 not hitting body.
@@ -39,54 +39,15 @@ int main(int argc, char **argv) {
 		HEX.legs[i]->motors[2]->writeReg(CW_ANGLE_LIMIT_L, data3, 4);
 	}*/
 
-	//HEX.liftOntoBase();
+	// HEX.liftOntoBase();
 
 	HEX.timersReady = true;
 
+	for(volatile int i = 0; i < 100000000; i++);
+	HEX.pidPitch->togglePID(true);
+	HEX.pidRoll->togglePID(true);
+
 	while(1){	//super loop
-
-
-		/*HEX.legs[3]->setPosition(-243.710,0.0,-100);		// 1
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-243.710,40.0,-100);	// 2
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-243.710,-40.0,-100);	// 3
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-283.710,0.0,-100);	// 4
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-283.710,40.0,-100);	// 5
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-283.710,-40.0,-100);	// 6
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-203.710,0.0,-100);	// 7
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-203.710,40.0,-100);	// 8
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-203.710,-40.0,-100);	// 9
-		HEX.legs[3]->move();*/
-
-	/*	HEX.legs[3]->setPosition(-203.710,-80.0,-100);	// speed 0
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-203.710,80.0,-100);	// speed 1
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-203.710,0,-100);	// speed 2
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-283.710,0,-100);	// speed 2
-		HEX.legs[3]->move();
-
-		HEX.legs[3]->setPosition(-153.710,0,-100);	// speed 3
-		HEX.legs[3]->move();*/
 
 		if(HEX.newPosition && !HEX.charging && !HEX.lowPowerMode){
 			HEX.newPosition = false;

@@ -72,11 +72,11 @@ private:
 public:
 
 	/** @brief Roll angle of the device.  **/
-	float roll = 0;
+	volatile float roll = 0;
 	/** @brief Pitch angle of the device. **/
-	float pitch = 0;
+	volatile float pitch = 0;
 	/** @brief Yaw angle of the device.  **/
-	float yaw = 0;
+	volatile float yaw = 0;
 
 	/** @brief Timestamp of the device.  **/
 	uint16_t timestamp = 0;

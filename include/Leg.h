@@ -73,15 +73,15 @@ public:
 	/** @brief A Point object containing the current theta values of the motors of the leg. **/
 	Point<double> positionTHETA;
 	/** @brief A counter holding the current position in the walking path. **/
-	uint currentPathPoint = 0;
+	volatile uint currentPathPoint = 0;
 	/** @brief A Path object holding the current path for the leg. **/
 	Path * legPath = new Path();
 
 	/** @brief The duty cycle offset of the leg relative to leg 1 of the hexapod.**/
-	double dutyOffset = 0;
+	volatile double dutyOffset = 0;
 
 	/** @brief The tilt offset of the hexapod relative to its current position. **/
-	double tiltOffset = 0;
+	volatile double tiltOffset = 0;
 
 	/**
 	 * @brief Default constructor for the class.
