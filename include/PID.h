@@ -21,18 +21,18 @@ public:
 	 /** @brief The time interval of the controller.  **/
     double _dt = 0.05;
     /** @brief The proportional gain of the controller.  **/
-    double _Kp = 1.08;			// was -1.5, all zero no osc at -1.3, was -1.05
+    double _Kp = 1.08;			// was 1.08, all zero no osc at -1.3, was -1.05
     /** @brief The integral gain of the controller.  **/
-    double _Ki = 2.2;	// was -2.2
+    double _Ki = 2.2;	// was 2.2
     /** @brief The differential gain of the controller.  **/
-    double _Kd =  0.027;
+    double _Kd = 0.027; // was 0.027
     /** @brief The error in the controller. **/
     volatile double _pre_error = 0;
     /** @brief The cumulative integral of the controller.  **/
     volatile double _integral = 0;
 
     /** @brief The state of the controller. **/
-    volatile bool enabled = false;
+    bool enabled = false;
 
 	/**
 	 * @brief Default constructor for the class.

@@ -43,22 +43,23 @@ int main(int argc, char **argv) {
 
 	HEX.timersReady = true;
 
-	for(volatile int i = 0; i < 100000000; i++);
+	for(volatile int i = 0; i < 10000000; i++);
 	HEX.pidPitch->togglePID(true);
 	HEX.pidRoll->togglePID(true);
 
-	while(1){	//super loop
+	while(1) {	//super loop
 
-		if(HEX.newPosition && !HEX.charging && !HEX.lowPowerMode){
+		// if(HEX.newPosition && !HEX.charging && !HEX.lowPowerMode){
+		if(HEX.newPosition){
 			HEX.newPosition = false;
 
-			if(HEX.direction != -10){
-				HEX.setNextPathPoint();
-			}
+			// if(HEX.direction != -10){
+			// 	HEX.setNextPathPoint();
+			// }
 
 			HEX.move(DMA);
 		}
-
+		
 	}// end super loop
 	return 0;
 }//end main
@@ -97,7 +98,7 @@ void TIM3_IRQHandler(void){				// Accelerometer Reading, ADC Reading
 				case FAULT:
 					HEX.charging = false;
 					HEX.enterLowPowerMode();
-					HEX.remote->sendASCII("*****CHARGING FAULT*****");
+					// HEX.remote->sendASCII("*****CHARGING FAULT*****");
 					while(1);		//hang
 					break;
 				case NOT_CHARGING:
@@ -119,7 +120,7 @@ void TIM3_IRQHandler(void){				// Accelerometer Reading, ADC Reading
 			}
 
 			if(charger.voltage <= 20.0 && charger.voltage > 10.0){
-				HEX.remote->sendASCII("LOW BATTERY");
+				// HEX.remote->sendASCII("LOW BATTERY");
 				HEX.lowBatteryCount++;
 
 				if(HEX.lowBatteryCount >= 6){	//make sure that battery is actually low and not just a spike by checking for 1 minute.
@@ -265,14 +266,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef * UART_HandleStructure){
 			}
 		}else if(UART_HandleStructure->pRxBuffPtr[0] == 255 && UART_HandleStructure->pRxBuffPtr[1] == 250){// toggle motors command
 			bool toggleMotors = (bool)UART_HandleStructure->pRxBuffPtr[2];
-			switch(toggleMotors){
-				case 0:
-					HEX.disableMotors();
-					break;
-				case 1:
-					HEX.enableMotors();
-					break;
-				default: break;
+			if(toggleMotors){
+				HEX.enableMotors();
+			} else {
+				HEX.disableMotors();
 			}
 		}else if(UART_HandleStructure->pRxBuffPtr[0] == 255 && UART_HandleStructure->pRxBuffPtr[1] == 251){	//disable/enable pitch/roll PID
 			bool togglePID = (bool)UART_HandleStructure->pRxBuffPtr[2];

@@ -145,6 +145,7 @@ void Hexapod::SystemClock_Config(void){
 	  HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
+
 bool Hexapod::ADC_init(){
 
 	bool output = false;
@@ -682,7 +683,8 @@ void Hexapod::setNextPathPoint(void){
 			double yd = this->legs[i]->legPath->pathXYZ_dot[this->legs[i]->currentPathPoint].p2;//*this->speed*0.2;
 			double zd = this->legs[i]->legPath->pathXYZ_dot[this->legs[i]->currentPathPoint].p3;//*this->speed*0.2;
 
-			this->legs[i]->setSpeed(xd, yd, zd);
+			// this->legs[i]->setSpeed(xd, yd, zd);
+			this->legs[i]->setSpeedRPM(20, 20, 20);
 		//}
 
 		if(this->legs[i]->currentPathPoint == (uint)sizeof(this->legs[i]->legPath->pathXYZ)/sizeof(this->legs[i]->legPath->pathXYZ[0])-1){
